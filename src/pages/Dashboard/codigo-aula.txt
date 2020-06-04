@@ -1,0 +1,17 @@
+const response = await api.get('/transactions');
+
+const transactionsFormatted = response.data.transactions.map(
+  (transaction: Transaction) => ({
+    ...transaction,
+    formattedValue: formatValue(transaction.value),
+  }),
+);
+
+const balanceFormatted = {
+  income: formatValue(response.data.balance.income),
+  outcome: formatValue(response.data.balance.outcome),
+  total: formatValue(response.data.balance.total),
+};
+
+setTransactions(response.data.transaction);
+setBalance(response.data.balance);
